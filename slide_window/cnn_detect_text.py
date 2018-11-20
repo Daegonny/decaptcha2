@@ -28,7 +28,7 @@ result = []
 total_running_loss = []
 total_accuracy = []
 
-for n in range(30):
+for n in range(1):
     print("n = "+str(n))
     #define 2/3 = train, 1/3 = test
     all_idx = []
@@ -71,7 +71,7 @@ for n in range(30):
             # an affine operation: y = Wx + b
             self.fc1 = nn.Linear(16 * 5 * 5, 120)
             self.fc2 = nn.Linear(120, 84)
-            self.fc3 = nn.Linear(84, 28)
+            self.fc3 = nn.Linear(84, 2)
 
         def forward(self, x):
             # Max pooling over a (2, 2) window
@@ -96,7 +96,7 @@ for n in range(30):
     #print(net)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.7)
 
     for epoch in range(60):  # loop over the dataset multiple times
 
@@ -104,6 +104,7 @@ for n in range(30):
         for i, data in enumerate(trainloader, 0):
             # get the inputs
             inputs, labels = data
+
 
             # zero the parameter gradients
             optimizer.zero_grad()
@@ -116,12 +117,11 @@ for n in range(30):
 
             # print statistics
             running_loss += loss.item()
-            if i % 100 == 99:    # print every 100 mini-batches
-                total_running_loss.append((n,running_loss / 100))
-                #print('[%d, %5d] loss: %.3f' %
-                #      (epoch + 1, i + 1, running_loss / 100))
-                running_loss = 0.0
-
+            #if i % 100 == 99:    # print every 100 mini-batches
+            #    total_running_loss.append((n,running_loss/100))
+            #    running_loss = 0.0
+        total_running_loss.append(running_loss/200)
+        
     print('Finished Training')
     
 
@@ -140,43 +140,43 @@ for n in range(30):
         100 * correct / total))
     total_accuracy.append((n,correct,total,correct/total))
 
-    class_correct = list(0. for i in range(28))
-    class_total = list(0. for i in range(28))
-    with torch.no_grad():
-        for data in testloader:
-            images, labels = data
-            outputs = net(images)
-            _, predicted = torch.max(outputs, 1)
-            c = (predicted == labels).squeeze()
-            for i in range(4):
-                label = labels[i]
-                class_correct[label] += c[i].item()
-                class_total[label] += 1
-
-    for i in range(28):
-        if class_total[i] == 0:
-            pass
-        #    print('Accuracy of %5s : Not Tested' % (
-        #            classes[i]))
-        else:
-            result.append((n,classes[i], class_correct[i],class_total[i], class_correct[i] / class_total[i]))
-            #print('Accuracy of %5s : %2d / %2d = %2d %%' % (
-            #        classes[i], class_correct[i], class_total[i], 100 * class_correct[i] / class_total[i]))
-
-
-
-
-
-result = pd.DataFrame(result)
-result.columns = ['n','label','hit','total','percent']
-
-total_running_loss = pd.DataFrame(total_running_loss)
-total_running_loss.columns = ['n', 'metric']
-
-total_accuracy = pd.DataFrame(total_accuracy)
-total_accuracy.columns = ['n', 'hit', 'total','percent']
-
-
-result.to_csv("results/result2400.csv", sep=';')
-total_running_loss.to_csv("results/running_loss2400.csv", sep=";")
-total_accuracy.to_csv("results/accuracy2400.csv", sep=";")
+#    class_correct = list(0. for i in range(28))
+#    class_total = list(0. for i in range(28))
+#    with torch.no_grad():
+#        for data in testloader:
+#            images, labels = data
+#            outputs = net(images)
+#            _, predicted = torch.max(outputs, 1)
+#            c = (predicted == labels).squeeze()
+#            for i in range(4):
+#                label = labels[i]
+#                class_correct[label] += c[i].item()
+#                class_total[label] += 1
+#
+#    for i in range(28):
+#        if class_total[i] == 0:
+#            pass
+#        #    print('Accuracy of %5s : Not Tested' % (
+#        #            classes[i]))
+#        else:
+#            result.append((n,classes[i], class_correct[i],class_total[i], class_correct[i] / class_total[i]))
+#            #print('Accuracy of %5s : %2d / %2d = %2d %%' % (
+#            #        classes[i], class_correct[i], class_total[i], 100 * class_correct[i] / class_total[i]))
+#
+#
+#
+#
+#
+#result = pd.DataFrame(result)
+#result.columns = ['n','label','hit','total','percent']
+#
+#total_running_loss = pd.DataFrame(total_running_loss)
+#total_running_loss.columns = ['n', 'metric']
+#
+#total_accuracy = pd.DataFrame(total_accuracy)
+#total_accuracy.columns = ['n', 'hit', 'total','percent']
+#
+#
+#result.to_csv("results/result2400.csv", sep=';')
+#total_running_loss.to_csv("results/running_loss2400.csv", sep=";")
+#total_accuracy.to_csv("results/accuracy2400.csv", sep=";")
