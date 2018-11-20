@@ -132,6 +132,7 @@ for n in range(1):
         for data in testloader:
             images, labels = data
             outputs = net(images)
+            
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
@@ -139,6 +140,9 @@ for n in range(1):
     print('Accuracy of the network on the test images: %d %%' % (
         100 * correct / total))
     total_accuracy.append((n,correct,total,correct/total))
+
+
+    torch.save(net, "slide_window/models/model.pt")
 
 #    class_correct = list(0. for i in range(28))
 #    class_total = list(0. for i in range(28))
