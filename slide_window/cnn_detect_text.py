@@ -16,7 +16,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import os
-import pandas as pd
 
 
 wd = os.getcwd()
@@ -40,11 +39,11 @@ for n in range(1):
     testloader = None
 
 
-    all_idx = [i for i in range(200)]
+    all_idx = [i for i in range(500)]
     shuffle(all_idx)
 
-    train_idxs = all_idx[0:133]
-    test_idxs = all_idx[133:200]
+    train_idxs = all_idx[0:333]
+    test_idxs = all_idx[333:500]
 
     
 
@@ -96,9 +95,9 @@ for n in range(1):
     #print(net)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.7)
+    optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.85)
 
-    for epoch in range(60):  # loop over the dataset multiple times
+    for epoch in range(30):  # loop over the dataset multiple times
 
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
@@ -120,7 +119,7 @@ for n in range(1):
             #if i % 100 == 99:    # print every 100 mini-batches
             #    total_running_loss.append((n,running_loss/100))
             #    running_loss = 0.0
-        total_running_loss.append(running_loss/200)
+        total_running_loss.append(running_loss/500)
         
     print('Finished Training')
     
@@ -142,7 +141,7 @@ for n in range(1):
     total_accuracy.append((n,correct,total,correct/total))
 
 
-    torch.save(net, "slide_window/models/model.pt")
+    #torch.save(net, "slide_window/models/model.pt")
 
 #    class_correct = list(0. for i in range(28))
 #    class_total = list(0. for i in range(28))
