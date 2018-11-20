@@ -17,7 +17,7 @@ widths = pd.read_csv("label/char_width.csv",sep=";")['width'].unique()
 widths = widths.tolist()
 widths.sort()
 
-idx = 0
+idx = 1
 random.seed(0)
 chosen = []
 
@@ -39,7 +39,7 @@ for j in range(600):
         width = widths[rd]
         im = img.crop((position, 0, position + width, heigth))
         im = im.resize((32,32))
-        im.save("slide_window/slices/slice"+str(idx)+".png")
+        im.save("slide_window/text_non_text/slice"+str(idx)+".png")
         
         idx = idx + 1
         count = count + 1
