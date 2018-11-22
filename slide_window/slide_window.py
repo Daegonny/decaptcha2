@@ -14,11 +14,9 @@ import os
 wd = os.getcwd()
 os.chdir(wd)
 
-def img2tensor(img_path):
-    img = Image.open(img_path).convert('L')
+def img2tensor(img):
+    img = img.convert('L')
     img = img.point(lambda p: p > 210 and 255)
-
-    # Convert image and label to torch tensors
     img = np.asarray(img)/255
     img = np.expand_dims(img, axis=0)
     img = torch.from_numpy(img)
@@ -30,12 +28,15 @@ net = Net()
 net = torch.load("slide_window/models/model.pt")
 net.eval()
 
-
-for i in range(499):
-    
-    img_path = "slide_window/text_non_text/slice"+str(i+1)+".png"
-    inputs = img2tensor(img_path)
+def predict_label(img, net):
     with torch.no_grad():
-        outputs = net(inputs)
+        outputs = net(img2tensor(img))
         _, predicted = torch.max(outputs, 1)
-    print(int(predicted.data[0]))
+        result = int(predicted.data[0])
+    return result
+
+#IMPLEMENTAR O SLIDE WINDOW AQUI
+for i in range(499):
+    #aqui entra o pedaço da imagem
+    img = Image.open("slide_window/text_non_text/slice"+str(i+1)+".png")
+    print(predict_label(img, net))
