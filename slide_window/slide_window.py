@@ -37,7 +37,6 @@ def predict_label(img, net):
         outputs = net(img2tensor(img))
         _, predicted = torch.max(outputs, 1)
         result = int(predicted.data[0])
-        print(result)
     return result
 
 #IMPLEMENTAR O SLIDE WINDOW AQUI
