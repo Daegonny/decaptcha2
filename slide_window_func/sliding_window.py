@@ -38,7 +38,7 @@ with open('label/label.csv') as f:
 		fileName.append(str(line))
 		qtd_captchas = qtd_captchas + 1
 
-for cp in range(1):
+for cp in range(600):
 	image = cv2.imread("img/captcha"+str(cp)+".png")
 	crop = 0
 	i=0
