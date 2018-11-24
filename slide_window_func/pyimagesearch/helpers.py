@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import imutils
 
 def pyramid(image, scale=1.5, minSize=(30, 30)):
 	# yield the original image

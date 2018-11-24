@@ -39,11 +39,11 @@ for n in range(1):
     testloader = None
 
 
-    all_idx = [i for i in range(500)]
+    all_idx = [i for i in range(2225)]
     shuffle(all_idx)
 
-    train_idxs = all_idx[0:333]
-    test_idxs = all_idx[333:500]
+    train_idxs = all_idx[0:1470]
+    test_idxs = all_idx[1470:2225]
 
     
 
@@ -141,7 +141,7 @@ for n in range(1):
     total_accuracy.append((n,correct,total,correct/total))
 
 
-    #torch.save(net, "slide_window/models/model.pt")
+    torch.save(net, "slide_window/models/model.pt")
 
 #    class_correct = list(0. for i in range(28))
 #    class_total = list(0. for i in range(28))

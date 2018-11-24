@@ -10,11 +10,15 @@ import numpy as np
 from slide_window.net import Net
 from PIL import Image
 import os
+import cv2
 
 wd = os.getcwd()
 os.chdir(wd)
 
 def img2tensor(img):
+    img = cv2.cvtColor(np.asarray(img), cv2.COLOR_BGR2RGB)
+    img = Image.fromarray(img)
+    img = Image.fromarray(cv2.cvtColor(np.asarray(img), cv2.COLOR_BGR2RGB))
     img = img.convert('L')
     img = img.point(lambda p: p > 210 and 255)
     img = np.asarray(img)/255
@@ -33,10 +37,11 @@ def predict_label(img, net):
         outputs = net(img2tensor(img))
         _, predicted = torch.max(outputs, 1)
         result = int(predicted.data[0])
+        print(result)
     return result
 
 #IMPLEMENTAR O SLIDE WINDOW AQUI
 for i in range(499):
     #aqui entra o pedaço da imagem
     img = Image.open("slide_window/text_non_text/slice"+str(i+1)+".png")
-    print(predict_label(img, net))
+    #print(predict_label(img, net))
