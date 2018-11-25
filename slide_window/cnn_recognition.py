@@ -26,7 +26,7 @@ result = []
 total_running_loss = []
 total_accuracy = []
 
-for n in range(2):
+for n in range(30):
     print("n = "+str(n))
     #define 2/3 = train, 1/3 = test
     all_idx = []

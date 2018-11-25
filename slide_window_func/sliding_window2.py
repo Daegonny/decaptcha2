@@ -41,7 +41,7 @@ def predict_label(img, net):
         result = int(predicted.data[0])
     return result
 
-widths = [18,20,28,33]
+widths = [20,28,33]
 
 
 random.seed(0)
