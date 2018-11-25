@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader
 #import matplotlib.pyplot as plt
 #import numpy as np
 from random import shuffle
+import pandas as pd
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -27,7 +28,7 @@ result = []
 total_running_loss = []
 total_accuracy = []
 
-for n in range(1):
+for n in range(30):
     print("n = "+str(n))
     #define 2/3 = train, 1/3 = test
     all_idx = []
@@ -116,10 +117,10 @@ for n in range(1):
 
             # print statistics
             running_loss += loss.item()
-            #if i % 100 == 99:    # print every 100 mini-batches
-            #    total_running_loss.append((n,running_loss/100))
-            #    running_loss = 0.0
-        total_running_loss.append(running_loss/500)
+            if i % 100 == 99:    # print every 100 mini-batches
+                total_running_loss.append((n,running_loss/100))
+                running_loss = 0.0
+        #total_running_loss.append((n, running_loss/2225))
         
     print('Finished Training')
     
@@ -173,13 +174,13 @@ for n in range(1):
 #result = pd.DataFrame(result)
 #result.columns = ['n','label','hit','total','percent']
 #
-#total_running_loss = pd.DataFrame(total_running_loss)
-#total_running_loss.columns = ['n', 'metric']
+total_running_loss = pd.DataFrame(total_running_loss)
+total_running_loss.columns = ['n', 'metric']
 #
 #total_accuracy = pd.DataFrame(total_accuracy)
 #total_accuracy.columns = ['n', 'hit', 'total','percent']
 #
 #
-#result.to_csv("results/result2400.csv", sep=';')
-#total_running_loss.to_csv("results/running_loss2400.csv", sep=";")
+#result.to_csv("slide_window/results/result_text_non_text_2400.csv", sep=';')
+total_running_loss.to_csv("slide_window/results/running_loss_text_non_text_2400.csv", sep=";")
 #total_accuracy.to_csv("results/accuracy2400.csv", sep=";")
