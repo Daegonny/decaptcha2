@@ -171,8 +171,8 @@ total_accuracy = pd.DataFrame(total_accuracy)
 total_accuracy.columns = ['n', 'hit', 'total','percent']
 
 
-result.to_csv("slide_window/results/result2400.csv", sep=';')
-total_running_loss.to_csv("slide_window/results/running_loss2400.csv", sep=";")
-total_accuracy.to_csv("slide_window/results/accuracy2400.csv", sep=";")
+result.to_csv("slide_window/results/result2400-2.csv", sep=';')
+total_running_loss.to_csv("slide_window/results/running_loss2400-2.csv", sep=";")
+total_accuracy.to_csv("slide_window/results/accuracy2400-2.csv", sep=";")
 
-torch.save(net, "slide_window/models/model_recognition.pt")
+torch.save(net, "slide_window/models/model_recognition2.pt")
