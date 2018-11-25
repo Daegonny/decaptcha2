@@ -18,19 +18,15 @@ import torch.optim as optim
 import os
 import pandas as pd
 
-
-os.chdir("/home/daegonny/code/python/ia/decaptcha/")
-from loader import DriveData
-
-
-#define folder
-FOLDER_DATASET = "/home/daegonny/code/python/ia/decaptcha/"
+wd = os.getcwd()
+os.chdir(wd)
+from slide_window.loader_recognition import DriveData
 
 result = []
 total_running_loss = []
 total_accuracy = []
 
-for n in range(30):
+for n in range(2):
     print("n = "+str(n))
     #define 2/3 = train, 1/3 = test
     all_idx = []
@@ -47,14 +43,14 @@ for n in range(30):
 
     train_idxs = all_idx[0:400]
     test_idxs = all_idx[400:600]
-
+    
 
 
     #select train data
-    dset_train = DriveData(folder_dataset=FOLDER_DATASET, transform=None, line_idxs=train_idxs)
+    dset_train = DriveData(folder_dataset="", transform=None, line_idxs=train_idxs)
     print(len(dset_train))
     #select test data
-    dset_test = DriveData(folder_dataset=FOLDER_DATASET, transform=None, line_idxs=test_idxs)
+    dset_test = DriveData(folder_dataset="", transform=None, line_idxs=test_idxs)
     print(len(dset_test))
 
     trainloader = DataLoader(dset_train, batch_size=4, shuffle=True, num_workers=2)
@@ -165,9 +161,6 @@ for n in range(30):
             #        classes[i], class_correct[i], class_total[i], 100 * class_correct[i] / class_total[i]))
 
 
-
-
-
 result = pd.DataFrame(result)
 result.columns = ['n','label','hit','total','percent']
 
@@ -178,6 +171,8 @@ total_accuracy = pd.DataFrame(total_accuracy)
 total_accuracy.columns = ['n', 'hit', 'total','percent']
 
 
-result.to_csv("results/result2400.csv", sep=';')
-total_running_loss.to_csv("results/running_loss2400.csv", sep=";")
-total_accuracy.to_csv("results/accuracy2400.csv", sep=";")
+result.to_csv("slide_window/results/result2400.csv", sep=';')
+total_running_loss.to_csv("slide_window/results/running_loss2400.csv", sep=";")
+total_accuracy.to_csv("slide_window/results/accuracy2400.csv", sep=";")
+
+torch.save(net, "slide_window/models/model_recognition.pt")

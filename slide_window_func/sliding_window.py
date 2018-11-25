@@ -6,14 +6,15 @@ import argparse
 import time
 import cv2
 import torch
-from slide_window.slide_window import predict_label
 from slide_window.net import Net
+from slide_window.slide_window import predict_label
+
 
 def pos(vet, cp):
 	j=1
 	vet.sort(key=lambda y: y[1])
 	for i in vet:
-		cv2.imwrite("cropped_slide_window/cropped_"+str(cp)+"_"+str(j)+".png", i[0])
+		cv2.imwrite("sliced/cropped_"+str(cp)+"_"+str(j)+".png", i[0])
 		j = j +1
 
 #ap = argparse.ArgumentParser()
@@ -38,8 +39,8 @@ with open('label/label.csv') as f:
 		fileName.append(str(line))
 		qtd_captchas = qtd_captchas + 1
 
-for cp in range(600):
-	image = cv2.imread("img/captcha"+str(cp)+".png")
+for cp in range(1):
+	image = cv2.imread("img/captcha"+str(2)+".png")
 	crop = 0
 	i=0
 	vet.clear()

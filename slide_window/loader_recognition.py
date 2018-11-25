@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 26 11:27:46 2018
+Created on Sun Nov 25 09:23:46 2018
 
 @author: daegonny
 """
 
 import torch
-#import torchvision.transforms as transforms
 from torch.utils.data.dataset import Dataset
 import numpy as np
 from PIL import Image
-FOLDER_DATASET = "/home/daegonny/code/python/ia/decaptcha/"
 
 
 class DriveData(Dataset):
@@ -25,13 +23,13 @@ class DriveData(Dataset):
         count = 0
         self.__xs = []
         self.__ys = []
-        with open('data/captcha-label/label.csv') as f:
+        with open('label/label.csv') as f:
             for line in f:
                 if count in line_idxs:
-                    self.__xs.append("cropped/"+str(count)+"_1.png")
-                    self.__xs.append("cropped/"+str(count)+"_2.png")
-                    self.__xs.append("cropped/"+str(count)+"_3.png")
-                    self.__xs.append("cropped/"+str(count)+"_4.png")
+                    self.__xs.append("sliced/slice_"+str(count)+"_1.png")
+                    self.__xs.append("sliced/slice_"+str(count)+"_2.png")
+                    self.__xs.append("sliced/slice_"+str(count)+"_3.png")
+                    self.__xs.append("sliced/slice_"+str(count)+"_4.png")
 
                     self.__ys.append(self.translate_label(line[0]))
                     self.__ys.append(self.translate_label(line[1]))
