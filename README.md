@@ -3,7 +3,7 @@
 ## Links
 
 - Link para apresentação: [slides][slides]
-- Link para códigos: [página no GitHub][src]
+- Link para o artigo: [anais ENCM][src]
 
 [slides]: https://docs.google.com/presentation/d/1psWgsrjiEjbSFMq9vHUbBaWy0v4w4pkLUX2JCuHmM4k/edit?usp=sharing
-[src]: https://github.com/Daegonny/decaptcha2
+[src]: http://enmc.fadepe.org.br/assets/files/Anais_ENMC_2019.pdf
