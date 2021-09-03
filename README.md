@@ -1,4 +1,4 @@
-# Decaptcha2:  Segmentação e Reconhecimento de caracteresem Captcha Textual com Redes Neurais Convolucionais eJanela Deslizante
+# Decaptcha2:  Segmentação e Reconhecimento de caracteres em Captcha Textual com Redes Neurais Convolucionais eJanela Deslizante
 
 ## Links
 
